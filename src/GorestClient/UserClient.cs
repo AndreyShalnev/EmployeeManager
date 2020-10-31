@@ -13,10 +13,12 @@ namespace GorestClient
     {
         private IClientConfig _config;
         private string _url => $"{_config.BaseUrl}/users";
+        private HttpClient _client;
 
         public UserClient(IClientConfig config)
         {
             _config = config;
+            InitClient();
         }
 
         public PagedResponse<User[]> GetAll(int page)
@@ -36,28 +38,23 @@ namespace GorestClient
 
         public ActionResult<User> Create(User user)
         {
-            var client = GetClient();
             var content = user.GetFormUrlEncodedContent();
-
-            var response = client.PostAsync(_url, content);
+            var response = _client.PostAsync(_url, content);
 
             return response.GetActionResult<User>();
         }
 
         public ActionResult<User> Update(User user)
         {
-            var client = GetClient();
             var content = user.GetFormUrlEncodedContent();
-
-            var response = client.PutAsync($"{_url}/{user.Id}", content);
+            var response = _client.PutAsync($"{_url}/{user.Id}", content);
 
             return response.GetActionResult<User>();
         }
 
         public ActionResult Delete(int id)
         {
-            var client = GetClient();
-            var response = client.DeleteAsync($"{_url}/{id}");
+            var response = _client.DeleteAsync($"{_url}/{id}");
             
             return response.GetActionResult<User>();
         }
@@ -65,18 +62,16 @@ namespace GorestClient
         private TResult SendGetRequest<TResult>(string parameters)
             where TResult : class, new()
         {
-            var client = GetClient();
-            var response = client.GetAsync($"{_url}/{parameters}");
+            var response = _client.GetAsync($"{_url}/{parameters}");
 
             return response.DeserializeTo<TResult>();
         }
 
-        private HttpClient GetClient()
+        private void InitClient()
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(_url);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _config.APIToken);
-            return client;
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri(_url);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _config.APIToken);
         }
     }
 }

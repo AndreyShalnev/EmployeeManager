@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using EmployeeManager.Data;
+using GorestClient;
+using GorestClient.Data;
 
 namespace EmployeeManager
 {
@@ -22,10 +13,24 @@ namespace EmployeeManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IUserClient Client;
+
         public MainWindow()
         {
             var clientConfig = ConfigurationSettings.GetConfig("GorestClient") as ClientConfig;
+            Client = new UserClient(clientConfig); 
+
             InitializeComponent();
+        }
+
+        private void EmployeeGrid_OnInitialized(object sender, EventArgs e)
+        {
+            EmployeeGrid.DataContext = Client.GetAll(1).Data;
+        }
+
+        private void NameFilter_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            EmployeeGrid.DataContext = Client.GetByName(NameFilter.Text).Data;
         }
     }
 }
