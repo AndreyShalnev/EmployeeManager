@@ -3,6 +3,7 @@ using System.Linq;
 using EmployeeManager.Data;
 using EmployeeManager.Data.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace GorestClient.Tests
 {
@@ -124,11 +125,11 @@ namespace GorestClient.Tests
 
         private UserClient Client()
         {
-            return new UserClient(new ClientConfig
-            {
-                BaseUrl = userClientUrl,
-                APIToken = "fa114107311259f5f33e70a5d85de34a2499b4401da069af0b1d835cd5ec0d56"
-            });
+            var config = new Mock<IClientConfig>();
+            config.Setup(x => x.BaseUrl).Returns(userClientUrl);
+            config.Setup(x => x.APIToken).Returns("fa114107311259f5f33e70a5d85de34a2499b4401da069af0b1d835cd5ec0d56");
+
+            return new UserClient(config.Object);
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿namespace EmployeeManager.Data
+﻿using System.Configuration;
+
+namespace EmployeeManager.Data
 {
-    public class ClientConfig
+    public class ClientConfig : ConfigurationSection, IClientConfig
     {
-        public string BaseUrl { get; set; }
-        public string APIToken { get; set; }
+        [ConfigurationProperty("BaseUrl", IsRequired = true)]
+        public string BaseUrl => (string)this["BaseUrl"];
+        [ConfigurationProperty("APIToken", IsRequired = true)]
+        public string APIToken => (string)this["APIToken"];
     }
 }

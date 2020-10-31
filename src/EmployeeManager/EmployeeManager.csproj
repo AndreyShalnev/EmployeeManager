@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,6 +94,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManager.Data.Common\EmployeeManager.Data.Common.csproj">
+      <Project>{5114f209-f32b-45ed-9adf-9567a48f87c5}</Project>
+      <Name>EmployeeManager.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EmployeeManager.Data\EmployeeManager.Data.csproj">
+      <Project>{b8751169-e467-48f5-9a8c-b71f694e9b80}</Project>
+      <Name>EmployeeManager.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GorestClient\GorestClient.csproj">
+      <Project>{9cc9ca2f-ab2d-41c3-a92a-7bf3f4aee62b}</Project>
+      <Name>GorestClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

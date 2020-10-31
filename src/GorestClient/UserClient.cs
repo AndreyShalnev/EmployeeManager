@@ -11,10 +11,10 @@ namespace GorestClient
 {
     public class UserClient : IUserClient
     {
-        private ClientConfig _config;
+        private IClientConfig _config;
         private string _url => $"{_config.BaseUrl}/users";
 
-        public UserClient(ClientConfig config)
+        public UserClient(IClientConfig config)
         {
             _config = config;
         }
