@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="530" Width="1072">
     <Grid Margin="0,0,-88,-57">
-        <DataGrid  Name="EmployeeGrid" HorizontalAlignment="Left" Height="414" Margin="10,67,0,0" VerticalAlignment="Top" Width="850" Initialized="EmployeeGrid_OnInitialized"
+        <DataGrid  Name="EmployeeGrid" HorizontalAlignment="Left" Height="414" Margin="10,67,0,0" VerticalAlignment="Top" Width="850"
+                   Initialized="EmployeeGrid_OnInitialized" SelectionChanged="EmployeeGrid_OnSelectionChanged"
                    ItemsSource="{Binding}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Name}" Width="200" />
@@ -21,5 +22,8 @@
         </DataGrid>
         <Label Content="Name filter" HorizontalAlignment="Left" Margin="13,18,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="91,22,0,0" TextWrapping="Wrap" Text="" Name="NameFilter" TextChanged="NameFilter_OnTextChanged" VerticalAlignment="Top" Width="215"/>
+        <Button Click="AddEmployee_ButtonClicked" HorizontalAlignment="Left" Width="100" Height="23" Margin="909,67,55,409" Content="Add"/>
+        <Button Name="EditButton" Click="EditEmployee_ButtonClicked" HorizontalAlignment="Left" Width="100" Height="23" Margin="909,108,55,368" Content="Edit" IsEnabled="False"/>
+        <Button Name="DeleteButton" Click="DeleteEmployee_ButtonClicked" HorizontalAlignment="Left" Width="100" Height="23" Margin="909,152,55,324" Content="Delete" IsEnabled="False"/>
     </Grid>
 </Window>
