@@ -4,23 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManager"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
-    <Grid>
-        <DataGrid  Name="EmployeeGrid" HorizontalAlignment="Left" Height="450" Margin="10,31,0,0" VerticalAlignment="Top" Width="850" Initialized="EmployeeGrid_OnInitialized"
-                   ItemsSource="{Binding}" AutoGenerateColumns="False" >
-
+        Title="MainWindow" Height="530" Width="1072">
+    <Grid Margin="0,0,-88,-57">
+        <DataGrid  Name="EmployeeGrid" HorizontalAlignment="Left" Height="414" Margin="10,67,0,0" VerticalAlignment="Top" Width="850" Initialized="EmployeeGrid_OnInitialized"
+                   ItemsSource="{Binding}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="200" />
-                <DataGridHyperlinkColumn Header="Email" Binding="{Binding Path=Email}" Width="200" />
-                <DataGridTextColumn Header="Gender" Binding="{Binding Path=Gender}" Width="50" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" Width="50" />
-                <DataGridTextColumn Header="Created" Binding="{Binding Path=Created}" Width="150" />
-                <DataGridTextColumn Header="Updated" Binding="{Binding Path=Updated}" Width="150" />
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Name}" Width="200" />
+                <DataGridHyperlinkColumn IsReadOnly="True" Header="Email" Binding="{Binding Path=Email}" Width="200" />
+                <DataGridTextColumn IsReadOnly="True" Header="Gender" Binding="{Binding Path=Gender}" Width="50" />
+                <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding Path=Status}" Width="50" />
+                <DataGridTextColumn IsReadOnly="True" Header="Created" Binding="{Binding Path=Created}" Width="150" />
+                <DataGridTextColumn IsReadOnly="True" Header="Updated" Binding="{Binding Path=Updated}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Name filter" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="88,4,0,0" TextWrapping="Wrap" Text="" Name="NameFilter" TextChanged="NameFilter_OnTextChanged" VerticalAlignment="Top" Width="120"/>
-
+        <Label Content="Name filter" HorizontalAlignment="Left" Margin="13,18,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="91,22,0,0" TextWrapping="Wrap" Text="" Name="NameFilter" TextChanged="NameFilter_OnTextChanged" VerticalAlignment="Top" Width="215"/>
     </Grid>
 </Window>
